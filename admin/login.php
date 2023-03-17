@@ -14,7 +14,9 @@ if(isset($_POST['login']))
 {
     $name=$_POST['name'];
     $password=$_POST['password'];
-    $select="SELECT * FROM `admin` WHERE name ='$name' and password='$password'";
+    $hash = sha1($password);
+
+    $select="SELECT * FROM `admin` WHERE name ='$name' and password='$hash'";
 $s=mysqli_query($conn,$select);
 // 1:46
 $numofrows=mysqli_num_rows($s);
@@ -23,19 +25,35 @@ $numofrows=mysqli_num_rows($s);
 // مميز سيقوم بأحضار 1  adminبالطبع لان 
 // or 0
 // الذي سوف يؤدي الي ارسال صف واحدcondationولقد قمنا بعمل 
+$row=mysqli_fetch_assoc($s);
 
 if($numofrows ==1){
 // echo "true admin";
-$_SESSION['admin']=$name;
+$_SESSION['admin']=[
+"name"=>$row['name'],
+"rule"=>$row['rules'],
+"id"=>$row['id']
+
+
+
+];
 // adminباسم الsessionسيقوم بتسجيل 
+$_SESSION['rule']=$row['rules'];
+
 
 path("/");
 
 }
 else{
-    // echo "false admin";
+    echo "false admin";
 }
+};
+
+if(isset($_SESSION['admin'])){
+    path("/");
+    // URLمن log in لكي لا يستطيع الرجوع الي
 }
+// print_r($_SESSION)
 
 
 // print_r($_SESSION);
@@ -44,6 +62,7 @@ else{
 // لتفريغها
 // session_destroy();
 // declrationلنزع ال
+
 ?>
 
 <h1 class="text-center text-info display-1 mt-5">log in page</h1>

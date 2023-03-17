@@ -3,7 +3,7 @@ include 'public/head.php';
 include 'public/nav.php';
 include 'App/funcations.php';
 
-Auth();
+Auth(2,3);
 ?>
 <div class="home pt-1">
 

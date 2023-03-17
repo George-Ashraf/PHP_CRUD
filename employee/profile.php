@@ -18,7 +18,7 @@ if (isset($_GET['show'])) {
   $row = mysqli_fetch_assoc($s);
 };
 
-Auth();
+Auth(2);
 
 ?>
 

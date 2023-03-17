@@ -10,7 +10,7 @@ include '../public/nav.php';
 
 
 
-$select = "SELECT * FROM `employeewithdepartment`";
+$select = "SELECT * FROM `employeewithdepartment` ORDER BY id asc";
 $s = mysqli_query($conn, $select);
 if (isset($_GET['delete'])) {
   $id = $_GET['delete'];
@@ -30,7 +30,7 @@ if (isset($_GET['delete'])) {
 // unlink("./upload/1678047844ana.png")
 
 // fileتقوم بمسح ال
-Auth();
+Auth(2);
 
 ?>
 

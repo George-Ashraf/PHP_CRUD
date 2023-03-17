@@ -23,3 +23,45 @@ body{
     min-width: 20px
 }
 
+.notauth{
+width: 700px;
+height: 500px;
+margin:60px auto 0 auto;
+border-radius: 30px;
+box-shadow:  20px 20px 60px #822bad,
+             -20px -20px 60px #b03aeb;
+text-align: center;
+
+}
+.notauth i,
+.notauth h1,
+.notauth p{
+
+
+    margin-top: 50px;
+ font-weight: bold;
+}
+
+.notauth i{
+    font-size: 100px;
+    color: black;
+}
+.notauth p{
+    font-size: 18px;
+    color: white;
+
+}
+.notauth h1{
+    color: white;
+}
+
+.modal-content{
+    background-color: black;
+}
+.modal-body{
+    background-color: #777;
+}
+
+
+
+

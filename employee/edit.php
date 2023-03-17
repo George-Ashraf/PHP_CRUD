@@ -44,7 +44,7 @@ $depid=$_POST['depid'];
     
     }
 };
-Auth();
+Auth(2);
 
 
 ?>

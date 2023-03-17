@@ -9,13 +9,21 @@ include '../public/nav.php';
 
 if(isset($_POST['send'])){
 $name=$_POST['name'];
-$insert="INSERT INTO `department` VALUES(null,'$name',Default) ";
-$i=mysqli_query($conn,$insert);
-path('department/list.php');
+// if(empty($name)){
+//     // فاضي قم بأرسال هذه الرسالة department لو اسم ال
+//     // insertلو مش فاضي قم بعمل 
+//     echo"please enter  department name";
+// }
+// else{
+//     $insert="INSERT INTO `department` VALUES(null,'$name',Default) ";
+//     $i=mysqli_query($conn,$insert);
+//     path('department/list.php');
+    
+// }
 
 
 };
-Auth();
+Auth(2,3);
 
 ?>
 

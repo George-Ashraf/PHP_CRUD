@@ -22,7 +22,7 @@ if(isset($_GET['search'])){
 
 // fileتقوم بمسح ال
 
-Auth();
+Auth(2);
 
 ?>
 

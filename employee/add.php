@@ -9,10 +9,10 @@ include '../public/nav.php';
 $select="SELECT * FROM `department`";
 $department=mysqli_query($conn,$select);
 
-
+$errors=[];
 if(isset($_POST['send'])){
-$name=$_POST['name'];
-$salary=$_POST['salary'];
+$name=filtervalidation($_POST['name']);
+$salary=filtervalidation($_POST['salary']);
 $depid=$_POST['depid'];
 // img code 
 $img_name=time() . $_FILES['img']['name'];
@@ -23,16 +23,51 @@ $img_name=time() . $_FILES['img']['name'];
 // functionومن الممكن عدم استدعاء اسم الصورة والاكتفاء بال
 $tmp_name=$_FILES['img']['tmp_name'];
 $location='upload/'.$img_name;
-move_uploaded_file($tmp_name,$location );
-// تستخدم لاخذ نسخة من الفيلات من مكان الي اخر مثل الصور
+
+$imgvalue= $_FILES['img']['name'];
+$imgtype=$_FILES['img']['type'];
+$imgsize=$_FILES['img']['size'];
+if(validfilesize($imgsize,2)){
+    $errors[]="file oversize 2 mega";
+}
 
 
+
+if(validimgtype($imgtype)){
+    $errors[]="img must be jbg,jpeg,png,jif";
+}
+
+
+if(strvalid($imgvalue) ){
+    $errors[]="please enter valid  img required ";
+    // emptyعمره ميبقي imgاسم ال
+}
+
+print_r($_FILES);
+
+
+
+
+
+if(strvalid($name) ){
+    $errors[]="please enter valid  name required and bigger than 3  ";
+}
+
+
+if(numvalid($salary)){
+    $errors[]="please enter employee salary valid";
+}
+// insert فاستطيع تنفيذ errorفارغة بالتالي انا لا املك errors لو ال
+if(empty($errors)){
+    move_uploaded_file($tmp_name,$location );
+    // تستخدم لاخذ نسخة من الفيلات من مكان الي اخر مثل الصور
+    // فارغةerrors[]في النهاية نقوم بوضع هذه هنا لكي لا يقوم برفع الصورة لا اذا كانت 
 $insert="INSERT INTO employees VALUES(null,'$name',$salary,'$img_name',Default,$depid) ";
 $i=mysqli_query($conn,$insert);
 path('employee/list.php');
 // testmessage($i,'insert');
 
-
+}
 }
 // lec37
 // one value وامامه key  في رفع الفيلات لانها تأخذmethod :postلا يمكن استخدام ال
@@ -46,12 +81,23 @@ path('employee/list.php');
 // databaseوسيتم تخزين اسم الصورة فقط في 
 // print_r($_FILES);
 
-Auth();
+Auth(2);
 
 ?>
 
 <h1 class="text-center text-info display-1 mt-5">Add employee page</h1>
 <div class="container col-6">
+    <!-- dataلكي اقوم بعرض ال -->
+    <?php if(!empty($errors)): ?>
+<div class="alert alert-danger">
+    <ul>
+        <?php foreach($errors as $data) : ?>
+        <li><?=$data ?> </li>
+        <?php endforeach;  ?>
+    </ul>
+</div>
+<?php endif; ?>
+
     <div class="card">
         <div class="card-body">
             <!-- enctype:encrupted type  -->

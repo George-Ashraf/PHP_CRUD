@@ -40,6 +40,9 @@ if (isset($_GET['logout'])) {
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/lec36crud/index.php">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/lec36crud/admin/profile.php">Your profile</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Departments
@@ -58,6 +61,19 @@ if (isset($_GET['logout'])) {
                             <li><a class="dropdown-item" href="/lec36crud/employee/list.php">List employees</a></li>
                         </ul>
                     </li>
+                <?php if ($_SESSION['admin']['rule']==1) :    ?>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            admins
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/lec36crud/admin/add.php">Add admin</a></li>
+                            <li><a class="dropdown-item" href="/lec36crud/admin/list.php">List admin</a></li>
+                        </ul>
+                    </li>
+                <?php endif;    ?>
+
                 <?php endif;    ?>
 
             </ul>
