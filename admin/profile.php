@@ -10,7 +10,7 @@ include '../public/nav.php';
 
 
 $adminid = $_SESSION['admin']['id'];
-echo $adminid;
+// echo $adminid;
 $select = "SELECT * FROM `adminalldata` WHERE id=$adminid";
 $s = mysqli_query($conn, $select);
 $row = mysqli_fetch_assoc($s);
